@@ -853,14 +853,14 @@ public class CommonServiceImpl implements CommonService{
             fileList.addAll(fileMapper.selectBatchIds(ids)
                     .stream()
                     .map(item ->
-                            FileDataBO.builder(
-                                    item.getFileName(),
-                                    item.getFileUrl(),
-                                    item.getId(),
-                                    item.getUid(),
-                                    item.getFileType(),
-                                    item.getFileSize()
-                            ))
+                            FileDataBO.builder()
+                                    .id(item.getId())
+                                    .fileName(item.getFileName())
+                                    .fileSize(item.getFileSize())
+                                    .fileType(item.getFileType())
+                                    .fileUrl(item.getFileUrl())
+                                    .uid(item.getUid())
+                                    .build())
                     .toList());
         }
         return fileList;
