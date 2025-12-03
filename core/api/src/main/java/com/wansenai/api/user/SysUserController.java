@@ -69,6 +69,7 @@ public class SysUserController {
         return userService.updatePassword(updatePasswordDto);
     }
 
+
     @PostMapping(value = "updatePasswordByEmail")
     public Response<String> updatePasswordByEmail(@RequestBody UpdatePasswordByEmailDto updatePasswordByEmailDto) {
         return userService.updatePasswordByEmail(updatePasswordByEmailDto);
