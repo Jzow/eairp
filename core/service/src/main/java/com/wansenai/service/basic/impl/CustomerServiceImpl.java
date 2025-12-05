@@ -38,10 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -206,11 +203,11 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         customer.setThirdQuarterAccountReceivable(Optional.ofNullable(addOrUpdateCustomerDTO.getThirdQuarterAccountReceivable()).orElse(BigDecimal.ZERO));
         customer.setFourthQuarterAccountReceivable(Optional.ofNullable(addOrUpdateCustomerDTO.getFourthQuarterAccountReceivable()).orElse(BigDecimal.ZERO));
 
-        var total = calculateTotalAccount(List.of(
-                addOrUpdateCustomerDTO.getFirstQuarterAccountReceivable(),
-                addOrUpdateCustomerDTO.getSecondQuarterAccountReceivable(),
-                addOrUpdateCustomerDTO.getThirdQuarterAccountReceivable(),
-                addOrUpdateCustomerDTO.getFourthQuarterAccountReceivable()
+        var total = calculateTotalAccount(Arrays.asList(
+                Optional.ofNullable(addOrUpdateCustomerDTO.getFirstQuarterAccountReceivable()).orElse(BigDecimal.ZERO),
+                Optional.ofNullable(addOrUpdateCustomerDTO.getSecondQuarterAccountReceivable()).orElse(BigDecimal.ZERO),
+                Optional.ofNullable(addOrUpdateCustomerDTO.getThirdQuarterAccountReceivable()).orElse(BigDecimal.ZERO),
+                Optional.ofNullable(addOrUpdateCustomerDTO.getFourthQuarterAccountReceivable()).orElse(BigDecimal.ZERO)
         ));
         customer.setTotalAccountReceivable(total);
 
